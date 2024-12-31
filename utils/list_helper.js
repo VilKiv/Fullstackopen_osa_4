@@ -1,5 +1,4 @@
 const dummy = (blogs) => {
-    console.log(1)
     return 1
 }
 
@@ -29,8 +28,7 @@ const mostBlogs = (blogs) => {
         }
         return blogsByAuthor;
     }
-    const result = blogs.reduce(BlogsPerAuthor, {mostBlogsBy:{}})["mostBlogsBy"]
-    return result
+    return blogs.reduce(BlogsPerAuthor, {mostBlogsBy:{}})["mostBlogsBy"]
 }
 
 const mostLikes = (blogs) => {
@@ -44,8 +42,7 @@ const mostLikes = (blogs) => {
         }
         return likesByAuthor
     }
-    const result = blogs.reduce(likesPerAuthor, {mostLikesBy:{}})["mostLikesBy"]
-    return result
+    return blogs.reduce(likesPerAuthor, {mostLikesBy:{}})["mostLikesBy"]
 }
 
 module.exports = {
