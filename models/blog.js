@@ -6,11 +6,11 @@ const blogSchema = new mongoose.Schema({
         required: [true, 'The blog needs to have title!']
     },
     author: {
-        type: String,
-        required: [true, 'The blog needs to have author!']
+        type: String
     },
     url: {
-        type: String
+        type: String,
+        required: [true, 'The blog needs to have url!']
     },
     likes: {
         type: Number,
