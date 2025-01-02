@@ -6,14 +6,6 @@ const middleware = require('../utils/middleware')
 
 usersRouter.post('/', middleware.userNamePasswordValidator, async (request, response) => {
   const { username, name, password } = request.body
-
-  // if (!username || username.length < 3) {
-  //   return response.status(400).json({error:'The minimum length for username is 3'})
-  // } 
-  // else if (!password || password.length < 3) {
-  //   return response.status(400).json({error:'The minimum length for password is 3'})
-  // }
-
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
 

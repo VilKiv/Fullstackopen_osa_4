@@ -7,8 +7,7 @@ const assert = require('node:assert')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const app = require('../app')
-const helper = require('./test_helper')
-const { listWithMultipleBlogs, nonExistingId, blogsInDb } = require('./test_helper')
+const { listWithMultipleBlogs, nonExistingId, blogsInDb, usersInDb } = require('./test_helper')
 
 const api = supertest(app)
 
@@ -324,7 +323,7 @@ describe('when there is initially one user at db', () => {
 
     test('creation succeeds with a fresh username', async () => {
 
-        const usersAtStart = await helper.usersInDb()
+        const usersAtStart = await usersInDb()
 
         const newUser = {
             username: 'VilKiv',
@@ -338,14 +337,14 @@ describe('when there is initially one user at db', () => {
             .expect(201)
             .expect('Content-Type', /application\/json/)
 
-        const usersAtEnd = await helper.usersInDb()
+        const usersAtEnd = await usersInDb()
 
         const usernames = usersAtEnd.map(u => u.username)
         assert(usernames.includes(newUser.username))
     })
 
     test('User creation fails with proper statuscode and message if username already taken', async () => {
-        const usersAtStart = await helper.usersInDb()
+        const usersAtStart = await usersInDb()
 
         const newUser = {
             username: 'blogTestUser',
@@ -359,7 +358,7 @@ describe('when there is initially one user at db', () => {
             .expect(400)
             .expect('Content-Type', /application\/json/)
 
-        const usersAtEnd = await helper.usersInDb()
+        const usersAtEnd = await usersInDb()
         console.log(usersAtEnd.length)
         assert(result.body.error.includes('expected `username` to be unique'))
 
@@ -367,7 +366,7 @@ describe('when there is initially one user at db', () => {
     })
 
     test('User creation fails with proper statuscode and message if username is too short or doesn\'t exist', async () => {
-        const usersAtStart = await helper.usersInDb()
+        const usersAtStart = await usersInDb()
 
         const newUser = {
             name: 'Superuser',
@@ -380,14 +379,14 @@ describe('when there is initially one user at db', () => {
             .expect(400)
             .expect('Content-Type', /application\/json/)
 
-        const usersAtEnd = await helper.usersInDb()
+        const usersAtEnd = await usersInDb()
         assert(result.body.error.includes('The minimum length for username is 3'))
 
         assert.strictEqual(usersAtEnd.length, usersAtStart.length)
     })
 
     test('User creation fails with proper statuscode and message if password is too short or doesn\'t exist', async () => {
-        const usersAtStart = await helper.usersInDb()
+        const usersAtStart = await usersInDb()
 
         const newUser = {
             username: 'Admin',
@@ -400,7 +399,7 @@ describe('when there is initially one user at db', () => {
             .expect(400)
             .expect('Content-Type', /application\/json/)
 
-        const usersAtEnd = await helper.usersInDb()
+        const usersAtEnd = await usersInDb()
         assert(result.body.error.includes('The minimum length for password is 3'))
 
         assert.strictEqual(usersAtEnd.length, usersAtStart.length)
