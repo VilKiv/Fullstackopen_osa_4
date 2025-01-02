@@ -32,3 +32,6 @@ yarn-error.log*
 
 # Optional coverage directory
 coverage/
+
+# testBlogs for Postman
+testBlogs.json

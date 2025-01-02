@@ -3,7 +3,7 @@ const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 const {listWithOneBlog, listWithMultipleBlogs} = require('./test_helper')
 
-describe('Most likes', () => {
+describe('Most likes tests', () => {
     const mostInSingleBlog = {author:"Edsger W. Dijkstra", likes: 5}
     const MostInMultipleBlogsList = {author:"Edsger W. Dijkstra", likes: 17}
 

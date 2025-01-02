@@ -3,7 +3,7 @@ const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 const {listWithOneBlog, listWithMultipleBlogs} = require('./test_helper')
 
-describe('favourite blogs', () => {
+describe('favourite blog tests', () => {
     test('when list has 0 blogs we should return empty object', () => {
         const result = listHelper.favouriteBlog([])
         assert.deepStrictEqual(result, {})
